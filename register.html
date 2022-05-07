@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="images/perfilPAG.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+  <title>Login Simulator</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <input type="checkbox" id="check">
+      <label for="check" class="bar-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul class="menu-burguer">
+        <li><a class="menu" href="index.html">Home</a></li>
+        <li><a class="menu" href="#">Contact</a></li>
+        <li><a class="menu" href="register.html">Login</a></li>
+      </ul>
+    </nav>
+    <h1>No te has registrado</h1>
+  </header>
+  <hr><br><br>
+  <main>
+    <form id="frm-register" action="">
+        <h2>Register</h2><br>
+        <img id="img-form"src="images/perfilGRIS.png" alt="start"><br> 
+        <!-- Nombre completo de la persona -->
+        <div>
+          <input type="text" name="name" id="RegName" placeholder="Full Name" minlength="3"/>
+          <i class="fas fa-exclamation-circle failure-icon"></i>
+          <i class="far fa-check-circle success-icon"></i>
+          <div class="error"></div>
+          <div id="messageError"></div>
+        </div>
+        <!-- Nombre de usuario -->
+        <div>
+          <input type="text" id="username" placeholder="User Name">
+          <i class="fas fa-exclamation-circle failure-icon"></i>
+          <i class="far fa-check-circle success-icon"></i>
+          <div class="error"></div>
+        </div>
+        <!-- Contraseña -->
+        <div>
+          <input type="password" id="pass" placeholder="Insert your password">
+          <i class="fas fa-exclamation-circle failure-icon"></i>
+          <i class="far fa-check-circle success-icon"></i>
+          <div class="error"></div>
+          <p class="form_input-error">La contraseña tiene que ser de 4 a 12 digitos.</p>
+        <!-- Confirmacion de la contraseña  -->
+          <input type="password" id="pass2" placeholder="Confirm your password">
+          <i class="fas fa-exclamation-circle failure-icon"></i>
+          <i class="far fa-check-circle success-icon"></i>
+          <div class="error"></div>
+          <p class="form_input-error" id="errorAlerta"></p>
+        </div><br>
+        <!-- Grupo: Terminos y Condiciones -->
+        <div class="form_grupo" id="grupo_terminos">
+          <label class="form_label"></label>
+            <input type="checkbox" class="form_checkbox" name="terminos" id="terminos"> Acepto los Terminos y Condiciones
+        </div>
+        <!-- Boton de registro -->
+        <div class="buttons">
+          <button class="myButton" type="submit" id="submit">Register</button>
+          <a href="login.html" rel="noopener noreferrer">Login</a>
+          <p class="form_mesg_exito" id="form_mesg_exito">Se ha registrado exitosamente.</p>         
+        </div>
+      </fieldset>
+    </form>
+  </main>
+  <footer class="footerREG">
+    Esteban Urrego Oviedo Copyright ©.
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
