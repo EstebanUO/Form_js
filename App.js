@@ -10,13 +10,51 @@ const user = id("RegName"),
     iconExito = classes("success-icon"),
     failIcon = classes("failure-icon");
 
+const userReg = [];
+
 form.addEventListener("submit", (e) =>{
+    //Prevenir los eventos precargados
     e.preventDefault();
 
-    motor(user, 0, "Fullname cannot be blank");
-    motor(username, 1, "Username cannot be blank");
-    motor(pass, 2, "Password cannot be blank");
-    motor(pass2, 3, "Password cannot be blank");
+    const RegUser = {
+        nameFull: user.value,
+        user: username.value,
+        password: pass.value,
+        confirmpass: pass2.value
+    };
+
+    if (
+        user.value === "",
+        username.value === "",
+        pass.value === "",
+        pass2.value === ""
+    ){
+        motor(user, 0, "Fullname cannot be blank");
+        motor(username, 1, "Username cannot be blank");
+        motor(pass, 2, "Password cannot be blank");
+        motor(pass2, 3, "Password cannot be blank");
+    }
+    //Validacion de contraseñas iguales
+    else if (pass.value !== pass2.value) {
+        alert("Las contraseñas no coinciden");
+    }
+    //Validacion que mire si el usuario ya existe
+    else if (userReg.find(user => user.user === username.value)) {
+        alert("El usuario ya existe!!")
+    }
+
+    else{
+        //Agregar el usuario
+        userReg.push(RegUser);
+        //Guardar en la LocalStorage
+        localStorage.setItem("user", JSON.stringify(userReg));
+        alert("Se ha registrado correctamente");
+        //Limpiar campos
+        user.value = "";
+        username.value = "";
+        pass.value = "";
+        pass2.value = "";
+    }
 });
 
 const motor = (id, serial, mensage) => {
@@ -27,15 +65,15 @@ const motor = (id, serial, mensage) => {
 
         //Icons
         failIcon[serial].style.opacity = "1";
-        iconExito[serial].style.opacity = "0";
+        // iconExito[serial].style.opacity = "0";
     }
     else{
         msjError[serial].innerHTML = "";
-        id.style.border = "2px solid green";
+        // id.style.border = "2px solid green";
 
         //Icons
         failIcon[serial].style.opacity = "0";
-        iconExito[serial].style.opacity = "1";
+        // iconExito[serial].style.opacity = "1";
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,19 +91,19 @@ function validateTypes(event){
         messageError.style.boxShadow = "none";
         RegName.style.borderBottom = "1px solid #fff"
     
-        // const cant = RegName.value.length;
-        // if (cant < 3) {
-        //     const valor = 3;
-        //     numCaracteres.textContent = "Caracteres necesarios: "+(valor - cant);
-        //     //Show
-        //     showTrue.style.visibility = "hidden";
-        //     showFalse.style.visibility = "visible";
-        // }else if (cant > 3) {
-        //     numCaracteres.textContent = " ";
-        //     //Show
-        //     showTrue.style.visibility = "visible";
-        //     showFalse.style.visibility = "hidden";
-        // }
+        const cant = RegName.value.length;
+        if (cant < 3) {
+            const valor = 3;
+            numCaracteres.textContent = "Caracteres necesarios: "+(valor - cant);
+            //Show
+            showTrue.style.visibility = "hidden";
+            showFalse.style.visibility = "visible";
+        }else if (cant > 3) {
+            numCaracteres.textContent = " ";
+            //Show
+            showTrue.style.visibility = "visible";
+            showFalse.style.visibility = "hidden";
+        }
     }else{
         messageError.textContent = "Caracter Invalido!!"
         messageError.style.backgroundColor = "#fff";
@@ -76,91 +114,3 @@ function validateTypes(event){
     }
     
 }
-//////////////////////////////////////////////////////////////////////////////
-
-// LOCALSTORE
-// const Fullname = [],
-//     UserName = [],
-//     Password1 = [],
-//     Password2 = [];
-
-// const BotonRegister = document.querySelector('#submit');
-
-/////////////////////////////////////////////////////////////////////////////////
-
-// submit.addEventListener("click", verificarPass);
-
-// const password3 = document.getElementById("pass");
-// const password4 = document.getElementById("pass2");
-
-// function verificarPass(){
-//     valido = document.getElementById("error2");
-
-//     if (password4.value == password3.value) {
-//         const valid = document.getElementById("password4");
-//         valid.style.border = "3px solid green";
-//         valido.innerHTML = "";
-//     }else{
-//         const valid = document.getElementById("password4");
-//         valid.style.border = "3px solid red";
-//         valido.innerHTML = "La contraseñas no coinciden!!";
-//     }
-// }
-///////////////////////////////////////////////////////////////////////////////
-// function verificarPasswords() {
- 
-//     // Ontenemos los valores de los campos de contraseñas 
-//     pass3 = document.getElementById('pass');
-//     pass4 = document.getElementById('pass2');
- 
-//     // Verificamos si las constraseñas no coinciden 
-//     if (pass1.value != pass2.value) {
- 
-//         // Si las constraseñas no coinciden mostramos un mensaje 
-//         document.getElementById("error2");
- 
-//         return false;
-//     } else {
- 
-//         // Si las contraseñas coinciden ocultamos el mensaje de error
-//         document.getElementById("error2");
- 
-//         // Refrescamos la página (Simulación de envío del formulario) 
-//         setTimeout(function() {
-//             location.reload();
-//         }, 3000);
- 
-//         return true;
-//     }
-// }
-////////////////////////////////////////////////////////////////////////////////
-
-// const bottonSubmit = document.getElementById("submit");
-// const inputPassword = document.getElementById("pass");
-// const inputPassword2 = document.getElementById("pass2");
-
-// function aux(var1, var2){
-//     if (var1 == var2) {
-//         const text = "";
-//         return text;
-//     }else{
-//         const text = "Las contraseñas no coinciden!!";
-//         return text;
-//     }
-// };
-
-// bottonSubmit.addEventListener("click", (event) =>{
-
-//     if (event.type = "click") {
-//         const value1 = inputPassword.value;
-//         const value2 = inputPassword2.value;
-
-//         const aux1 = aux(value1, value2);
-        
-//         const resultado = document.getElementById("errorAlerta");
-//         resultado.innerText = aux1;
-//     }else{
-//         console.log("si");
-//     }
-// });
- 
